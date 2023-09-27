@@ -13,10 +13,9 @@ const deviceID = 0; // The first vacuum from your account
 // machine you're using to connect, the country you're in.
 // The module exports a countries object which contains a mapping
 // between country codes and continent codes.
-const countryCode = "jp"; // If it doesn't appear to work try "ww", their world-wide catchall.
+const countryCode = "JP"; // If it doesn't appear to work try "ww", their world-wide catchall.
 const device_id = EcoVacsAPI.getDeviceId(machineIdSync(), deviceID);
-const continent =
-  ecovacsDeebot.countries[countryCode.toUpperCase()].continent.toLowerCase();
+const continent = ecovacsDeebot.countries[countryCode].continent.toLowerCase();
 // Leave blank or use 'ecovacs.com' for Ecovacs login
 // or use 'yeedi.com' for yeedi login (available since version 0.8.3-alpha.2)
 const authDomain = "";

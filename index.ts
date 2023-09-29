@@ -37,6 +37,7 @@ api
       console.log("Devices:", JSON.stringify(devices));
 
       let vacuum = devices[deviceID];
+      // https://github.com/mrbungle64/ecovacs-deebot.js/blob/master/types/library/vacBot.d.ts
       let vacbot = api.getVacBot(
         api.uid,
         EcoVacsAPI.REALM,
@@ -51,6 +52,7 @@ api
       vacbot.on("ready", (event: any) => {
         console.info("vacbot ready");
         vacbot.run("SpotArea", "start", targetAreas);
+        vacbot.disconnect();
       });
       vacbot.connect();
     });

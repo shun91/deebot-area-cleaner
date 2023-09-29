@@ -1,7 +1,7 @@
 {
   "name": "deebot-area-cleaner",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "git@github.com:shun91/deebot-area-cleaner.git",
   "author": "shun91 <shun9167@gmail.com>",
   "license": "MIT",

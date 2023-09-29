@@ -10,8 +10,8 @@ type RequestBody = {
 
 const accessToken = process.env.ACCESS_TOKEN;
 
-export const cleanSpotArea = functions.http(
-  "cleanSpotArea",
+export const deebotAreaCleaner = functions.http(
+  "deebotAreaCleaner",
   async (req: functions.Request, res: functions.Response) => {
     // accessTokenが不正なら401を返す
     // TODO: あとでコメントアウト外す

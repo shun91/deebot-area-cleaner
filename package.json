@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev": "functions-framework --source=dist/ --target=cleanSpotArea"
+    "dev": "functions-framework --source=dist/ --target=deebotAreaCleaner"
   },
   "dependencies": {
     "@google-cloud/functions-framework": "^3.3.0",

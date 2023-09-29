@@ -7,6 +7,8 @@ const EcoVacsAPI = ecovacsDeebot.EcoVacsAPI;
 const account_id = process.env.ACCOUNT_ID ?? "";
 const password = process.env.PASSWORD ?? "";
 
+const targetAreas = process.env.TARGET_AREAS ?? "";
+
 const deviceID = 0; // The first vacuum from your account
 
 // You need to provide a device ID uniquely identifying the
@@ -47,21 +49,8 @@ api
       // Once the session has started the bot will fire a 'ready' event.
       // At this point you can request information from your vacuum or send actions to it.
       vacbot.on("ready", (event: any) => {
-        console.log("vacbot ready");
-
-        vacbot.run("BatteryState");
-        vacbot.run("GetCleanState");
-        vacbot.run("GetChargeState");
-
-        vacbot.on("BatteryInfo", (battery: any) => {
-          console.log("Battery level: " + Math.round(battery));
-        });
-        vacbot.on("CleanReport", (value: any) => {
-          console.log("Clean status: " + value);
-        });
-        vacbot.on("ChargeState", (value: any) => {
-          console.log("Charge status: " + value);
-        });
+        console.info("vacbot ready");
+        vacbot.run("SpotArea", "start", targetAreas);
       });
       vacbot.connect();
     });

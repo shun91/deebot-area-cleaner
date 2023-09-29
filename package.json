@@ -5,7 +5,12 @@
   "repository": "git@github.com:shun91/deebot-area-cleaner.git",
   "author": "shun91 <shun9167@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "functions-framework --source=dist/ --target=cleanSpotArea"
+  },
   "dependencies": {
+    "@google-cloud/functions-framework": "^3.3.0",
     "ecovacs-deebot": "^0.9.5",
     "node-machine-id": "^1.1.12"
   },

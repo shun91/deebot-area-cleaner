@@ -58,6 +58,14 @@ export const cleanSpotArea = async () => {
   const promise = new Promise<void>((resolve) => {
     vacbot.on("ready", (event: any) => {
       console.info("vacbot ready");
+
+      // TODO: あとで消す
+      // 動作確認のためにclean stateを取得してみる
+      vacbot.run("GetCleanState");
+      vacbot.on("CleanReport", (value: any) => {
+        api.logEvent("Clean status", value);
+      });
+
       vacbot.run("SpotArea", "start", targetAreas);
       vacbot.disconnect();
       resolve();

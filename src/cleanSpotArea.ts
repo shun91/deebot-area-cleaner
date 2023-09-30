@@ -58,11 +58,19 @@ export const cleanSpotArea = async () => {
   const promise = new Promise<void>((resolve) => {
     vacbot.on("ready", (event: any) => {
       console.info("vacbot ready");
+
+      vacbot.run("GetCleanState");
+      vacbot.on("CleanReport", (value: any) => {
+        console.info("Clean status", value);
+        if (value === "spot_area") {
+          vacbot.disconnect();
+          console.info("disconnected");
+          resolve();
+        }
+      });
+
       vacbot.run("SpotArea", "start", targetAreas);
       console.info("ran SpotArea");
-      vacbot.disconnect();
-      console.info("disconnected");
-      resolve();
     });
   });
 

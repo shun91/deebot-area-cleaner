@@ -7,13 +7,12 @@ export const deebotAreaCleaner = functions.http(
   "deebotAreaCleaner",
   async (req: functions.Request, res: functions.Response) => {
     // accessTokenが不正なら401を返す
-    // TODO: あとでコメントアウト外す
-    // if (req.headers.authorization !== `Bearer ${accessToken}`) {
-    //   const error = { status: 401, message: "Unauthorized" };
-    //   console.error(error);
-    //   res.status(401).json(error);
-    //   return;
-    // }
+    if (req.headers.authorization !== `Bearer ${accessToken}`) {
+      const error = { status: 401, message: "Unauthorized" };
+      console.error(error);
+      res.status(401).json(error);
+      return;
+    }
 
     try {
       await cleanSpotArea();

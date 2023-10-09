@@ -1,4 +1,4 @@
-import ecovacsDeebot from "ecovacs-deebot";
+import { EcoVacsAPI, countries } from "ecovacs-deebot";
 import { machineIdSync } from "node-machine-id";
 
 // The account_id is your Ecovacs ID or email address.
@@ -16,16 +16,13 @@ class VacbotSingleton {
 
   static async getInstance() {
     if (!VacbotSingleton.instance) {
-      const EcoVacsAPI = ecovacsDeebot.EcoVacsAPI;
-
       // You need to provide a device ID uniquely identifying the
       // machine you're using to connect, the country you're in.
       // The module exports a countries object which contains a mapping
       // between country codes and continent codes.
       const countryCode = "JP"; // If it doesn't appear to work try "ww", their world-wide catchall.
       const device_id = EcoVacsAPI.getDeviceId(machineIdSync(), deviceID);
-      const continent =
-        ecovacsDeebot.countries[countryCode].continent.toLowerCase();
+      const continent = countries[countryCode].continent.toLowerCase();
       // Leave blank or use 'ecovacs.com' for Ecovacs login
       // or use 'yeedi.com' for yeedi login (available since version 0.8.3-alpha.2)
       const authDomain = "";

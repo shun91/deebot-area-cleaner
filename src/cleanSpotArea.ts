@@ -65,7 +65,11 @@ export const cleanSpotArea = async () => {
 
   // Once the session has started the bot will fire a 'ready' event.
   // At this point you can request information from your vacuum or send actions to it.
-  const promise = new Promise<void>((resolve) => {
+  const promise = new Promise<void>((resolve, reject) => {
+    vacbot.on("Error", (value: any) => {
+      reject(value);
+    });
+
     vacbot.on("ready", (event: any) => {
       console.info("vacbot ready");
 

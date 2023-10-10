@@ -16,10 +16,11 @@ export const deebotAreaCleaner = functions.http(
 
     try {
       await cleanSpotArea();
-      res.json({ status: "ok" });
+      res.json({ status: 200, message: "ok" });
     } catch (error: any) {
-      console.error("Unknown error:", error);
-      res.status(500).json(error);
+      const resp = { status: 500, message: `Unknown error: ${error}` };
+      console.error(resp);
+      res.status(500).json(resp);
     }
   }
 );

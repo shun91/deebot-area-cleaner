@@ -46,7 +46,7 @@ export const cleanSpotArea = async () => {
 
   const promise = new Promise<void>((resolve, reject) => {
     vacbot.on("Error", (value: any) => {
-      reject(value);
+      if (value !== "NoError: Robot is operational") reject(value);
     });
 
     vacbot.on("ready", (event: any) => {

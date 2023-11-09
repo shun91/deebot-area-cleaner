@@ -1,5 +1,5 @@
 import * as functions from "@google-cloud/functions-framework";
-import { cleanSpotArea } from "./cleanSpotArea";
+import { clean, getAll } from "./spotArea";
 
 const accessToken = process.env.ACCESS_TOKEN;
 
@@ -15,8 +15,15 @@ export const deebotAreaCleaner = functions.http(
     }
 
     try {
-      await cleanSpotArea();
-      res.json({ status: 200, message: "ok" });
+      if (req.path === "/") {
+        await clean();
+        res.json({ status: 200, message: "ok" });
+      } else if (req.path === "/spot-areas") {
+        const result = await getAll();
+        res.json(result);
+      } else {
+        res.status(404).json({ status: 404, message: "Not Found" });
+      }
     } catch (error: any) {
       const resp = { status: 500, message: `Unknown error: ${error}` };
       console.error(resp);

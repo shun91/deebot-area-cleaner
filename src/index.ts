@@ -16,7 +16,15 @@ export const deebotAreaCleaner = functions.http(
 
     try {
       if (req.path === "/") {
-        await clean();
+        const targetAreas = req.query.targetAreas;
+        if (typeof targetAreas !== "string" || targetAreas.length === 0) {
+          res.status(400).json({
+            status: 400,
+            message: "Bad Request: targetAreas is required",
+          });
+          return;
+        }
+        await clean({ targetAreas });
         res.json({ status: 200, message: "ok" });
       } else if (req.path === "/spot-areas") {
         const result = await getAll();

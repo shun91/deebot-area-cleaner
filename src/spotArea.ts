@@ -1,8 +1,13 @@
 import { VacbotSingleton } from "./VacbotSingleton";
 
-const targetAreas = process.env.TARGET_AREAS ?? "";
+type CleanArgs = {
+  /**
+   * 清掃するエリアのIDをカンマ区切りで指定する（例: 1,2,3）
+   */
+  targetAreas: string;
+};
 
-export const clean = async () => {
+export const clean = async ({ targetAreas }: CleanArgs) => {
   const vacbot = await VacbotSingleton.getInstance();
 
   const promise = new Promise<void>((resolve, reject) => {

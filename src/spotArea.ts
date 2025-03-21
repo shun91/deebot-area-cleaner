@@ -38,10 +38,15 @@ export const clean = async ({ targetAreas }: CleanArgs) => {
   return promise;
 };
 
+type SpotAreaResponse = {
+  summary: { mapSpotAreaID: number; mapSpotAreaName: string }[];
+  detail: any[];
+}
+
 export const getAll = async () => {
   const vacbot = await VacbotSingleton.getInstance();
 
-  const promise = new Promise<any[]>((resolve, reject) => {
+  const promise = new Promise<SpotAreaResponse>((resolve, reject) => {
     vacbot.on("Error", (value: any) => {
       if (value !== "NoError: Robot is operational") reject(value);
     });
@@ -65,7 +70,14 @@ export const getAll = async () => {
             if (result.length === mapSpotAreas.length) {
               vacbot.disconnect();
               console.info("disconnected");
-              resolve(result);
+
+              // mapSpotAreaID, mapSpotAreaNameが重要なので、それらをsummaryとして、
+              // 生のJSONはdetailとして返す
+              const summary = result.map((r) => ({
+                mapSpotAreaID: r.mapSpotAreaID,
+                mapSpotAreaName: r.mapSpotAreaName,
+              }));
+              resolve({ summary, detail: result });
             }
           });
         });
